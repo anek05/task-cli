@@ -2,8 +2,22 @@
     {
         "id": 1,
         "description": "test desc",
-        "status": "todo",
+        "status": "done",
         "createdAt": "2025-03-24T21:38:14.015285",
         "updatedAt": "2025-03-24T21:38:14.015285"
+    },
+    {
+        "id": 2,
+        "description": "Take a shower",
+        "status": "todo",
+        "createdAt": "2025-03-25T18:07:13.429569",
+        "updatedAt": "2025-03-25T18:07:13.429569"
+    },
+    {
+        "id": 3,
+        "description": "Eat dinner",
+        "status": "todo",
+        "createdAt": "2025-03-25T18:07:28.338989",
+        "updatedAt": "2025-03-25T18:07:28.338989"
     }
 ]
