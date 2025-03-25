@@ -4,11 +4,14 @@ import argparse
 import json
 from task import Task
 
+# Try to read tasks from tasks.json file
 try:
     with open("tasks.json", "r") as file:
+        # Read file content and parse JSON, defaulting to empty list if file is empty
         content = file.read()
         task_list = json.loads(content) if content else []
 except (FileNotFoundError, json.JSONDecodeError):
+    # If file doesn't exist or has invalid JSON, start with empty task list
     task_list = []
 
 
@@ -21,6 +24,7 @@ add_parser.add_argument("description", type=str, help="The description of the ta
 
 update_parser = subparsers.add_parser("update", help="Update a task")
 update_parser.add_argument("id", type=int, help="ID of the task you want to update")
+update_parser.add_argument("description", type=str, help="The description of the task")
 
 delete_parser = subparsers.add_parser("delete", help="Delete a task")
 delete_parser.add_argument("id", type=int, help="ID of the task you want to delete")
@@ -47,8 +51,15 @@ if args.command == "add":
     print(f"Added task: {new_task.description}")
 
 if args.command == "update":
+    task_list[args.id-1]["description"] = args.description
+    with open("tasks.json", "w") as file:
+        json.dump(task_list, file, indent=4)
     print(f"updated a task, {args.description}")
 
 if args.command == "delete":
-    print(f"deletet a task, {args.description}")
+    task_to_delete = task_list[args.id-1]
+    task_list.pop(args.id-1)
+    with open("tasks.json", "w") as file:
+        json.dump(task_list, file, indent=4)
+    print(f"deleted a task, {task_to_delete['description']}")
 
